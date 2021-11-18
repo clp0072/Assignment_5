@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int *addArray(int *arr, int newEle, int size) {
+    int *newArr = (int *)malloc(sizeof(int) * (size + 1));
+    for (int i = 0; i < size; i++) {
+        newArr[i] = arr[i];
+    }
+
+    newArr[size] = newEle;
+    return newArr;
+}
+
+void mergeSort(string file1, string file2, string outfile) {
+    fstream inFile1(file1, ios_base::in);
+    fstream inFile2(file2, ios_base::in);
+    ofstream outFile(outfile);
+    int *array1, *array2;
+    int a, count1 = 0, count2 = 0;
+    
+    while (inFile1 >> a) {
+        array1 = addArray(array1, a, count1++);
+    }
+
+    while (inFile2 >> a) {
+        array2 = addArray(array2, a, count2++);
+    }
+
+    int i = 0, j = 0, k = 0;
+
+    while (i < count1 && j < count2) {
+        if (array1[i] < array2[j]) {
+            outFile << array1[i++] << " "; 
+        }
+        
+        else {
+            outFile << array2[j++] << " "; 
+        }
+    }
+
+    while (i < count1) {
+        outFile << array1[i++] << " "; 
+    }
+
+    while (j < count2) {
+        outFile << array2[j++] << " "; 
+    }
+
+    cout << "Done.\n";
+    inFile1.close();
+    inFile2.close();
+    outFile.close();
+}
+
+int main() {
+
+    mergeSort("file1.txt", "file2.txt", "file3.txt");
+    return 0;
+}
