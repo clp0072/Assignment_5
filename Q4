@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+int main() {
+
+    srand (time(NULL));
+    string responses[8] = {
+
+        "I'm not sure, but i think you will find the answer in Chapter 20.",
+
+        "That's a good question.",
+
+        "If I were you, I would not worry about such things.",
+
+        "That question has puzzled philosophers for centuries.",
+
+        "I don't know. I'm just a machine.",
+
+        "Think about it and the answer will come to you.",
+
+        "I used to know the answer to that question, but I've forgotten it.",
+
+        "The answer can be found in a secret place in the woods."
+    };
+
+    string question;
+    cout << "Enter any one line quenstion : ";
+    cin >> question ;
+    int index = rand() % 8; //generates a number between 0 and 7.
+    cout << responses[index] << endl;
+
+}
